@@ -79,15 +79,6 @@ def search_and_add_book(isbn: str = Query(...)):
 def get_books():
     return load_books()  # Return all books from local storage
 
-# Endpoint to retrieve a specific book by its ISBN
-@app.get("/books/{isbn}", response_model=Book)
-def get_book(isbn: str):
-    books = load_books()
-    for book in books:
-        if book["isbn"] == isbn:
-            return book  # Return the book if found
-    raise HTTPException(status_code=404, detail="Book not found")
-
 # Endpoint to retrieve books by author
 @app.get("/books/author/{author}", response_model=List[Book])
 def get_books_by_author(author: str):
@@ -105,6 +96,15 @@ def get_books_by_title(title: str):
     if result:
         return result
     raise HTTPException(status_code=404, detail="No books found for the given title")
+
+# Endpoint to retrieve a specific book by its ISBN
+@app.get("/books/{isbn}", response_model=Book)
+def get_book(isbn: str):
+    books = load_books()
+    for book in books:
+        if book["isbn"] == isbn:
+            return book  # Return the book if found
+    raise HTTPException(status_code=404, detail="Book not found")
 
 # Endpoint to add a new book to local storage
 @app.post("/books", response_model=Book)
