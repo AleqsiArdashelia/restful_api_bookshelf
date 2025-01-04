@@ -15,6 +15,7 @@ class Book(BaseModel):
     author: str
     isbn: str
     description: Optional[str] = None
+    read: Optional[bool] = False
 
 def load_books():
     try:
@@ -47,6 +48,12 @@ def fetch_google_book(isbn: str):
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to fetch book details")
 
+
+@app.get("/books/search")
+def search_book(isbn: str = Query(...)):
+
+    return fetch_google_book(isbn)
+
 @app.post("/books/search")
 def search_and_add_book(isbn: str = Query(...)):
 
@@ -61,11 +68,6 @@ def search_and_add_book(isbn: str = Query(...)):
     books.append(book)
     save_books(books)
     return book
-
-@app.get("/books/search")
-def search_book(isbn: str = Query(...)):
-
-    return fetch_google_book(isbn)
 
 @app.get("/books", response_model=List[Book])
 def get_books():
@@ -107,5 +109,3 @@ def delete_book(isbn: str):
             save_books(books)
             return {"message": "Book deleted successfully"}
     raise HTTPException(status_code=404, detail="Book not found")
-
-
