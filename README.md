@@ -27,7 +27,7 @@ The Bookshelf API is a FastAPI-based application for managing a personal collect
 bookshelf_api/
 ├── main.py            # Main application file
 ├── books.json         # JSON file for local book storage
-├── books.json         # JSON file for local book storage
+├── requirements.txt   # Dependencies required for the project
 └── readme.md          # Project documentation
 ```
 
@@ -58,7 +58,7 @@ bookshelf_api/
 
 3. Install dependencies:
     ```bash
-    pip install fastapi uvicorn httpx
+    pip install -r requirements.txt
     ```
 
 4. (Optional) Create an empty `books.json` file for local storage:
