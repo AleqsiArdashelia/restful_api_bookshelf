@@ -47,13 +47,13 @@ bookshelf_api/
 1. Clone the repository:
     ```bash
     git clone <repository_url>
-    cd bookshelf_api
+    cd restful_api_bookshelf
     ```
 
 2. Create a virtual environment and activate it:
     ```bash
     python -m venv venv
-    source venv/bin/activate    # On Windows: venv\Scripts\activate
+    venv\Scripts\activate
     ```
 
 3. Install dependencies:
